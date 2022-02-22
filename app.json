@@ -1,0 +1,34 @@
+{
+    "pages": [
+        "pages/index/index",
+        "pages/logs/logs",
+        "pages/map/map"
+    ],
+    "window": {
+        "backgroundTextStyle": "dark",
+        "navigationBarBackgroundColor": "#fff",
+        "navigationBarTitleText": "彩虹天气预报",
+        "navigationBarTextStyle": "black",
+        "enablePullDownRefresh": true
+    },
+    "tabBar": {
+        "color": "#7A7E83",
+        "selectedColor": "#3cc51f",
+        "borderStyle": "black",
+        "backgroundColor": "#ffffff",
+        "list": [
+            {
+                "pagePath": "pages/index/index",
+                "text": "天气",
+                "iconPath": "resources/weather_gray.png",
+                "selectedIconPath": "resources/weather.png"
+            },
+            {
+                "pagePath": "pages/map/map",
+                "text": "地图",
+                "iconPath": "resources/map_gray.png",
+                "selectedIconPath": "resources/map.png"
+            }
+        ]
+    }
+}

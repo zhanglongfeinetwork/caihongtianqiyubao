@@ -1,0 +1,125 @@
+<view class="backgroundView">
+    <view class="content">
+        <view class="topView">
+            <image class="topImg" mode="aspectFill" src="../img/{{m1.nowBackImage( nowBackGround[0],nowBackGround[1] )}}.png"></image>
+            <view bindtap="chooseLocation" class="location">
+                <view>
+                    <image class="locationImg" mode="aspectFit" src="../img/location.png"></image>
+                    <text>{{location}}</text>
+                </view>
+            </view>
+            <view class="nowTemp">{{nowTemperature}}</view>
+            <view class="nowWind">{{nowWind}}</view>
+            <view class="air_now">{{nowAir}}</view>
+        </view>
+        <scroll-view class="hourly" scrollX="true">
+            <view class="oneHourly" wx:for="{{hourlyArr}}" wx:key="unique">
+                <view class="oneHourlyFlex">
+                    <view class="hourlyDate">{{m1.getLast(index,item.time)}}</view>
+                    <image class="hourlyImg" mode="aspectFit" src="../img/{{item.cond_code}}.png"></image>
+                    <view class="hourlyTmp">{{item.tmp}}°</view>
+                    <view class="hourlyWind">
+                        <image mode="aspectFit" src="../img/{{m1.windDirection(item.wind_dir)}}.png"></image>
+                        <text>{{m1.windTrans(item.wind_sc)}}</text>
+                    </view>
+                </view>
+            </view>
+        </scroll-view>
+        <ad unit-id="adunit-edb3724f0273f8d7"></ad>
+        <view class="dailyForecast">
+            <view class="daily" style="flex-direction:row;" wx:for="{{dailyForecast}}" wx:key="unique">
+                <view class="dailyDate">{{m1.getDailyDate(index,item.date)}}</view>
+                <image class="dailyImg" mode="aspectFit" src="../img/{{item.cond_code_d}}.png"></image>
+                <view class="dailyCond">{{item.cond_txt_d}}</view>
+                <view class="dailyTmp">{{item.tmp_min}}°~{{item.tmp_max}}°</view>
+            </view>
+        </view>
+        <view class="lifeStyle">
+            <view class="life">
+                <image class="lifeImg" mode="aspectFit" src="../img/cold.png"></image>
+                <view class="lifeText">{{lifeStyle[0].brf}}感冒</view>
+            </view>
+            <view class="life">
+                <image class="lifeImg" mode="aspectFit" src="../img/cloth.png"></image>
+                <view class="lifeText">{{lifeStyle[1].brf}}</view>
+            </view>
+            <view class="life">
+                <image class="lifeImg" mode="aspectFit" src="../img/car.png"></image>
+                <view class="lifeText">{{lifeStyle[2].brf}}洗车</view>
+            </view>
+            <view class="life">
+                <image class="lifeImg" mode="aspectFit" src="../img/umbrella.png"></image>
+                <view class="lifeText">紫外线{{lifeStyle[3].brf}}</view>
+            </view>
+        </view>
+        <view class="botton">实时天气数据来张龙飞夜观天象</view>
+    </view>
+</view>
+<wxs module="m1">
+var getLast = (function(index, str) {
+    if (index == 0) {
+        return ("现在")
+    } else {
+        return (str.split(" ")[(1)])
+    }
+});
+var getDailyDate = (function(index, str) {
+    if (index == 0) {
+        return ("今天")
+    } else {
+        return (str.split("-")[(1)] + "/" + str.split("-")[(2)])
+    }
+});
+var windTrans = (function(str) {
+    if (str.match("-")) {
+        return (str + "级")
+    } else {
+        return (str)
+    }
+});
+var windDirection = (function(str) {
+    if (str.indexOf("东北") != -1) {
+        return ("eastnorth")
+    } else if (str.indexOf("东南") != -1) {
+        return ("eastsouth")
+    } else if (str.indexOf("西南") != -1) {
+        return ("westsouth")
+    } else if (str.indexOf("西北") != -1) {
+        return ("westnorth")
+    } else if (str.indexOf("东") != -1) {
+        return ("east")
+    } else if (str.indexOf("南") != -1) {
+        return ("south")
+    } else if (str.indexOf("西") != -1) {
+        return ("west")
+    } else if (str.indexOf("北") != -1) {
+        return ("north")
+    } else {
+        return ("north")
+    }
+});
+var nowBackImage = (function(code, temp) {
+    if (code >= 100 && code <= 104) {
+        if (temp > 35) {
+            return ("sun2")
+        } else {
+            return ("sun")
+        }
+    } else if (code >= 105 && code <= 213) {
+        return ("cloud")
+    } else if (code >= 300 && code <= 313) {
+        return ("rain")
+    } else if (code >= 400 && code <= 407) {
+        return ("snow")
+    } else if (code >= 500 && code <= 508) {
+        return ("smog")
+    } else {
+        return ("sun")
+    }
+});
+module.exports.getLast = getLast;
+module.exports.getDailyDate = getDailyDate;
+module.exports.windTrans = windTrans;
+module.exports.windDirection = windDirection;
+module.exports.nowBackImage = nowBackImage;
+</wxs>

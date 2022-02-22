@@ -1,0 +1,15 @@
+<view class="head" style="flex-direction:row;">
+    <!-- <image class="icon" src="../../resources/laohei.jpg"></image> -->
+    <ad unit-id="adunit-7bf61faf552d7507"></ad>
+    <button bindtap="openLocation">打开位置</button>
+    <button bindtap="starRun">开始跑步</button>
+    <button bindtap="stopRun">暂停跑步</button>
+    <text>
+里程数：{{meters}}km</text>
+    <text>
+
+时间：{{time}}</text>
+</view>
+<view class="mainView">
+    <map class="mapView" covers="{{covers}}" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" style="width: 100%; height: 375px;"></map>
+</view>
