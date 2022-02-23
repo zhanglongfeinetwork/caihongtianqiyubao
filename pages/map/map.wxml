@@ -13,3 +13,5 @@
 <view class="mainView">
     <map class="mapView" covers="{{covers}}" latitude="{{latitude}}" longitude="{{longitude}}" markers="{{markers}}" style="width: 100%; height: 375px;"></map>
 </view>
+
+<show-con showCon ="{{showCon}}"></show-con>

@@ -1,3 +1,6 @@
 {
-    "navigationBarTitleText": "地图"
+    "navigationBarTitleText": "地图",
+    "usingComponents": {
+        "show-con": "../components/showCon"
+      }
 }

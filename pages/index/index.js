@@ -10,7 +10,14 @@ Page({
         nowAir: "50  优",
         hourlyArr: [],
         dailyForecast: [],
-        lifeStyle: []
+        lifeStyle: [],
+        showCon:false
+    },
+    changeModalCancel:function name(params) {
+        var t = this;
+        t.setData({
+            showCon:false
+        })
     },
     gotest: function() {
         wx.navigateTo({
@@ -57,6 +64,7 @@ Page({
         });
     },
     onLoad: function() {
+       
         this.getLocationAction();
     },
     getLocationAction: function() {
@@ -94,6 +102,9 @@ Page({
                             a = t.authSetting["scope.userLocation"], i.getLocationAction();
                         }
                     });
+                    i.setData({
+                        showCon:true
+                    })
                 }, 3e3));
             }
         });

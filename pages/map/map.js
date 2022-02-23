@@ -38,12 +38,14 @@ Page({
         markers: [],
         covers: [],
         meters: 0,
-        time: "0:00:00"
+        time: "0:00:00",
+        showCon:false
     },
     onLoad: function(o) {
         this.getLocation(), console.log("onLoad"), t(this);
     },
     openLocation: function() {
+        let i = this
         wx.getLocation({
             type: "gcj02",
             success: function(t) {
@@ -52,6 +54,23 @@ Page({
                     longitude: t.longitude,
                     scale: 28
                 });
+            },
+            fail:function(){
+                wx.showToast({
+                    title: "检测到您没获得位置权限，请先开启哦",
+                    icon: "none",
+                    duration: 3e3
+                })
+                setTimeout(function() {
+                    wx.openSetting({
+                        success: function(t) {
+                            a = t.authSetting["scope.userLocation"], i.getLocationAction();
+                        }
+                    });
+                    i.setData({
+                        showCon:true
+                    })
+                }, 3e3)
             }
         });
     },

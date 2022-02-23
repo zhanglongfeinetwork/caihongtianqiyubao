@@ -54,72 +54,85 @@
         </view>
         <view class="botton">实时天气数据来张龙飞夜观天象</view>
     </view>
+
+    <view wx:if="{{showCon}}" class="modal-mask" bindtap="changeModalCancel">
+        <view class="modal-dialog">
+            <view class="modal-title">提示</view>
+            <view class="modal-content">
+                获取定位失败，请前往设置打开定位权限
+            </view>
+            <view class="modal-footer">
+                <view class="btn-cancel" catchtap="changeModalCancel">取消</view>
+                <button open-type="openSetting" class="btn-confirm button-on-view" style="padding:0rpx;" catchtap="changeModalCancel">设置</button>
+            </view>
+        </view>
+    </view>
 </view>
 <wxs module="m1">
-var getLast = (function(index, str) {
-    if (index == 0) {
-        return ("现在")
-    } else {
-        return (str.split(" ")[(1)])
-    }
-});
-var getDailyDate = (function(index, str) {
-    if (index == 0) {
-        return ("今天")
-    } else {
-        return (str.split("-")[(1)] + "/" + str.split("-")[(2)])
-    }
-});
-var windTrans = (function(str) {
-    if (str.match("-")) {
-        return (str + "级")
-    } else {
-        return (str)
-    }
-});
-var windDirection = (function(str) {
-    if (str.indexOf("东北") != -1) {
-        return ("eastnorth")
-    } else if (str.indexOf("东南") != -1) {
-        return ("eastsouth")
-    } else if (str.indexOf("西南") != -1) {
-        return ("westsouth")
-    } else if (str.indexOf("西北") != -1) {
-        return ("westnorth")
-    } else if (str.indexOf("东") != -1) {
-        return ("east")
-    } else if (str.indexOf("南") != -1) {
-        return ("south")
-    } else if (str.indexOf("西") != -1) {
-        return ("west")
-    } else if (str.indexOf("北") != -1) {
-        return ("north")
-    } else {
-        return ("north")
-    }
-});
-var nowBackImage = (function(code, temp) {
-    if (code >= 100 && code <= 104) {
-        if (temp > 35) {
-            return ("sun2")
+    var getLast = (function (index, str) {
+        if (index == 0) {
+            return ("现在")
+        } else {
+            return (str.split(" ")[(1)])
+        }
+    });
+    var getDailyDate = (function (index, str) {
+        if (index == 0) {
+            return ("今天")
+        } else {
+            return (str.split("-")[(1)] + "/" + str.split("-")[(2)])
+        }
+    });
+    var windTrans = (function (str) {
+        if (str.match("-")) {
+            return (str + "级")
+        } else {
+            return (str)
+        }
+    });
+    var windDirection = (function (str) {
+        if (str.indexOf("东北") != -1) {
+            return ("eastnorth")
+        } else if (str.indexOf("东南") != -1) {
+            return ("eastsouth")
+        } else if (str.indexOf("西南") != -1) {
+            return ("westsouth")
+        } else if (str.indexOf("西北") != -1) {
+            return ("westnorth")
+        } else if (str.indexOf("东") != -1) {
+            return ("east")
+        } else if (str.indexOf("南") != -1) {
+            return ("south")
+        } else if (str.indexOf("西") != -1) {
+            return ("west")
+        } else if (str.indexOf("北") != -1) {
+            return ("north")
+        } else {
+            return ("north")
+        }
+    });
+    var nowBackImage = (function (code, temp) {
+        if (code >= 100 && code <= 104) {
+            if (temp > 35) {
+                return ("sun2")
+            } else {
+                return ("sun")
+            }
+        } else if (code >= 105 && code <= 213) {
+            return ("cloud")
+        } else if (code >= 300 && code <= 313) {
+            return ("rain")
+        } else if (code >= 400 && code <= 407) {
+            return ("snow")
+        } else if (code >= 500 && code <= 508) {
+            return ("smog")
         } else {
             return ("sun")
         }
-    } else if (code >= 105 && code <= 213) {
-        return ("cloud")
-    } else if (code >= 300 && code <= 313) {
-        return ("rain")
-    } else if (code >= 400 && code <= 407) {
-        return ("snow")
-    } else if (code >= 500 && code <= 508) {
-        return ("smog")
-    } else {
-        return ("sun")
-    }
-});
-module.exports.getLast = getLast;
-module.exports.getDailyDate = getDailyDate;
-module.exports.windTrans = windTrans;
-module.exports.windDirection = windDirection;
-module.exports.nowBackImage = nowBackImage;
+    });
+    module.exports.getLast = getLast;
+    module.exports.getDailyDate = getDailyDate;
+    module.exports.windTrans = windTrans;
+    module.exports.windDirection = windDirection;
+    module.exports.nowBackImage = nowBackImage;
 </wxs>
